@@ -1,0 +1,93 @@
+{
+  "info": {
+    "_postman_id": "4e5c915b-5c7c-43c2-9f8f-census",
+    "name": "Census Service APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create census record",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"RequestInfo\": {\n        \"apiId\": \"census-service\",\n        \"ver\": \"1.0\",\n        \"ts\": null,\n        \"action\": \"_create\",\n        \"did\": null,\n        \"key\": null,\n        \"msgId\": \"20240307|en_IN\",\n        \"authToken\": \"\"\n    },\n    \"Census\": [\n        {\n            \"tenantId\": \"pb.amritsar\",\n            \"hierarchyType\": \"ADMIN\",\n            \"boundaryCode\": \"pb.amritsar.zone1\",\n            \"type\": \"people\",\n            \"totalPopulation\": 10000,\n            \"source\": \"Census 2024\"\n        }\n    ]\n}"
+        },
+        "url": {
+          "raw": "http://{{hostWithPort}}/census/_create",
+          "protocol": "http",
+          "host": [
+            "{{hostWithPort}}"
+          ],
+          "path": [
+            "census",
+            "_create"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Search census record",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"RequestInfo\": {\n        \"apiId\": \"census-service\",\n        \"ver\": \"1.0\",\n        \"ts\": null\n    },\n    \"CensusSearchCriteria\": {\n        \"tenantId\": \"pb.amritsar\",\n        \"areaCodes\": [\"pb.amritsar.zone1\"]\n    }\n}"
+        },
+        "url": {
+          "raw": "http://{{hostWithPort}}/census/_search",
+          "protocol": "http",
+          "host": [
+            "{{hostWithPort}}"
+          ],
+          "path": [
+            "census",
+            "_search"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update census record",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"RequestInfo\": {\n        \"apiId\": \"census-service\",\n        \"ver\": \"1.0\",\n        \"ts\": null,\n        \"action\": \"_update\",\n        \"did\": null,\n        \"key\": null,\n        \"msgId\": \"20240307|en_IN\",\n        \"authToken\": \"\"\n    },\n    \"Census\": [\n        {\n            \"id\": \"{id}\",\n            \"tenantId\": \"pb.amritsar\",\n            \"hierarchyType\": \"ADMIN\",\n            \"boundaryCode\": \"pb.amritsar.zone1\",\n            \"type\": \"people\",\n            \"totalPopulation\": 12000,\n            \"source\": \"Census 2024\"\n        }\n    ]\n}"
+        },
+        "url": {
+          "raw": "http://{{hostWithPort}}/census/_update",
+          "protocol": "http",
+          "host": [
+            "{{hostWithPort}}"
+          ],
+          "path": [
+            "census",
+            "_update"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
