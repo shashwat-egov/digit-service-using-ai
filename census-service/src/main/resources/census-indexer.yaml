@@ -1,0 +1,22 @@
+ServiceMaps:
+  serviceName: Census Service
+  version: 1.0.0
+  mappings:
+    - topic: save-census
+      configKey: INDEX
+      indexes:
+        - name: censusindex-v1
+          type: _doc
+          id: $.id
+          isBulk: true
+          timeStampField: $.auditDetails.createdTime
+          jsonPath: $.Census
+    - topic: update-census
+      configKey: INDEX
+      indexes:
+        - name: censusindex-v1
+          type: _doc
+          id: $.id
+          isBulk: true
+          timeStampField: $.auditDetails.lastModifiedTime
+          jsonPath: $.Census
