@@ -1,5 +1,6 @@
 package digit.repository;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import digit.repository.querybuilder.CensusQueryBuilder;
 import digit.repository.rowmapper.CensusRowMapper;
 import digit.web.models.Census;
@@ -25,7 +26,7 @@ public class CensusRepository {
     @Autowired
     private CensusRowMapper rowMapper;
 
-    private PGobject toPgObject(Object data) throws SQLException {
+    private PGobject toPgObject(Object data) throws SQLException, JsonProcessingException {
         if (data == null) return null;
         PGobject jsonObject = new PGobject();
         jsonObject.setType("jsonb");

@@ -33,7 +33,7 @@ public class CensusService {
 
     public List<Census> create(CensusRequest request){
         request.getCensus().forEach(c -> {
-            List<String> ids = idgenUtil.getIdList(request.getRequestInfo(), c.getTenantId(), "census.id", "", 1);
+            List<String> ids = idgenUtil.getIdList(request.getRequestInfo(), c.getTenantId(), "btr.registrationid", "", 1);
             c.setId(ids.get(0));
         });
         if(Boolean.TRUE.equals(config.getKafkaEnabled())){
