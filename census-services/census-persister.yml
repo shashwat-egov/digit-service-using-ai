@@ -1,0 +1,51 @@
+serviceMaps:
+  serviceName: census-services
+  mappings:
+    - version: 1.0
+      description: Persists census data in eg_census table
+      fromTopic: save-census
+      isTransaction: true
+      queryMaps:
+        - query: |
+            INSERT INTO eg_census(id, tenantId, hierarchyType, boundaryCode, type, totalPopulation, populationByDemographics, effectiveFrom, effectiveTo, source, additionalDetails, createdBy, lastModifiedBy, createdTime, lastModifiedTime)
+            VALUES (?, ?, ?, ?, ?, ?, ?::jsonb, ?, ?, ?, ?::jsonb, ?, ?, ?, ?);
+          basePath: Census
+          jsonMaps:
+            - jsonPath: $.Census.id
+            - jsonPath: $.Census.tenantId
+            - jsonPath: $.Census.hierarchyType
+            - jsonPath: $.Census.boundaryCode
+            - jsonPath: $.Census.type
+            - jsonPath: $.Census.totalPopulation
+            - jsonPath: $.Census.populationByDemographics
+            - jsonPath: $.Census.effectiveFrom
+            - jsonPath: $.Census.effectiveTo
+            - jsonPath: $.Census.source
+            - jsonPath: $.Census.additionalDetails
+            - jsonPath: $.Census.auditDetails.createdBy
+            - jsonPath: $.Census.auditDetails.lastModifiedBy
+            - jsonPath: $.Census.auditDetails.createdTime
+            - jsonPath: $.Census.auditDetails.lastModifiedTime
+    - version: 1.0
+      description: Updates census data in eg_census table
+      fromTopic: update-census
+      isTransaction: true
+      queryMaps:
+        - query: |
+            UPDATE eg_census SET tenantId=?, hierarchyType=?, boundaryCode=?, type=?, totalPopulation=?, populationByDemographics=?::jsonb, effectiveFrom=?, effectiveTo=?, source=?, additionalDetails=?::jsonb, lastModifiedBy=?, lastModifiedTime=? WHERE id=?;
+          basePath: Census
+          jsonMaps:
+            - jsonPath: $.Census.tenantId
+            - jsonPath: $.Census.hierarchyType
+            - jsonPath: $.Census.boundaryCode
+            - jsonPath: $.Census.type
+            - jsonPath: $.Census.totalPopulation
+            - jsonPath: $.Census.populationByDemographics
+            - jsonPath: $.Census.effectiveFrom
+            - jsonPath: $.Census.effectiveTo
+            - jsonPath: $.Census.source
+            - jsonPath: $.Census.additionalDetails
+            - jsonPath: $.Census.auditDetails.lastModifiedBy
+            - jsonPath: $.Census.auditDetails.lastModifiedTime
+            - jsonPath: $.Census.id
+
